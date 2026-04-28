@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrated Dev Environment - turtleboyagain120</title>
+    <style>
+        :root { --accent: #00ff88; --bg: #0d0d0d; --panel: #1a1a1a; }
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; background: var(--bg); color: #fff; font-family: 'Consolas', monospace; overflow: hidden; }
+
+        /* UI STRUCTURE */
+        header { background: #000; padding: 10px 20px; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+        .main-container { display: flex; height: calc(100% - 40px); }
+        
+        /* SIDEBAR (The Disguise) */
+        nav { width: 250px; background: var(--panel); border-right: 1px solid #333; padding: 20px; font-size: 13px; }
+        .file { margin-bottom: 12px; cursor: pointer; color: #888; transition: 0.2s; }
+        .file:hover { color: var(--accent); }
+        .file.active { color: var(--accent); font-weight: bold; border-left: 2px solid var(--accent); padding-left: 5px; }
+
+        /* EDITOR AREA */
+        main { flex: 1; position: relative; padding: 20px; }
+        .terminal { background: #000; border: 1px solid #333; padding: 15px; height: 150px; position: absolute; bottom: 20px; left: 20px; right: 20px; border-radius: 4px; }
+        
+        /* THE GHOST CONSOLE (The Proxy Search) */
+        #search-gate { margin-top: 50px; text-align: center; }
+        input { width: 70%; padding: 12px; background: #000; border: 1px solid #444; color: var(--accent); border-radius: 4px; outline: none; }
+        button { padding: 12px 25px; background: var(--accent); border: none; border-radius: 4px; font-weight: bold; cursor: pointer; }
+
+        /* THE PORTAL (The Hidden Mirror) */
+        #portal-wrap { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; }
+        iframe { width: 100%; height: 100%; border: none; background: #fff; }
+
+        /* PANIC SCREEN */
+        #panic-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 10000; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div>File  Edit  Selection  View  Go  Terminal  Help</div>
+    <div style="color:var(--accent)">● turtleboyagain120_core.sys</div>
+</header>
+
+<div class="main-container">
+    <nav>
+        <div style="color:#555; margin-bottom:15px; font-weight:bold;">EXPLORER</div>
+        <div class="file active">📂 src</div>
+        <div class="file" style="margin-left:15px;">📄 main.py</div>
+        <div class="file" style="margin-left:15px;">📄 lab_results.json</div>
+        <div class="file" onclick="location.reload()">📄 index.html</div>
+        <div style="margin-top:40px; color:#555; font-weight:bold;">LAB_NOTES</div>
+        <textarea id="notes" style="width:100%; height:150px; background:transparent; color:#888; border:1px solid #333; font-size:10px;"></textarea>
+        <button onclick="saveNotes()" style="font-size:10px; padding:5px; margin-top:5px; width:100%;">Save to Cache</button>
+    </nav>
+
+    <main>
+        <div id="search-gate">
+            <h2 style="font-weight:300; color:#888;">Remote Node Gateway</h2>
+            <p style="font-size:12px; color:#444; margin-bottom:30px;">[HANDSHAKE PROTOCOL v4.1]</p>
+            <input type="text" id="target" placeholder="Enter target domain or keywords...">
+            <button onclick="initTunnel()">EXECUTE</button>
+            <p style="font-size:10px; color:#333; margin-top:100px;">Authenticated via is-a-dev Network</p>
+        </div>
+
+        <div class="terminal">
+            <div style="color:var(--accent)">> system_ready.</div>
+            <div id="logs" style="font-size:11px; color:#555; margin-top:5px;">[LOG] Waiting for user input...</div>
+        </div>
+    </main>
+</div>
+
+<!-- THE HIDDEN LAYERS -->
+<div id="portal-wrap">
+    <div style="position:fixed; top:5px; right:5px; z-index:10001; opacity:0.1" onmouseenter="this.style.opacity=1" onmouseleave="this.style.opacity=0.1">
+        <button onclick="initTunnel()" style="background:#555; color:#fff;">ROTATE (R)</button>
+        <button onclick="panic()" style="background:#ff4444; color:#fff;">EXIT (ESC)</button>
+    </div>
+    <iframe id="portal-frame"></iframe>
+</div>
+
+<iframe id="panic-screen" src="https://google.com"></iframe>
+
+<script>
+    // 1. MIRROR ENGINE (The Loophole)
+    const nodes = [
+        "https://nadeko.net",
+        "https://piped.video",
+        "https://artclass.site",
+        "https://vercel.app"
+    ];
+    let nIdx = 0;
+
+    function initTunnel() {
+        const val = document.getElementById('target').value;
+        if(!val) return;
+        
+        document.getElementById('portal-wrap').style.display = 'block';
+        const frame = document.getElementById('portal-frame');
+        
+        // Logical Routing
+        const base = nodes[nIdx];
+        frame.src = base + encodeURIComponent(val);
+        
+        document.getElementById('logs').innerText = `[LOG] Routing via Node ${nIdx}... Established.`;
+        nIdx = (nIdx + 1) % nodes.length;
+    }
+
+    // 2. PANIC MODE (The ESC Key)
+    function panic() {
+        document.getElementById('portal-frame').src = "about:blank";
+        document.getElementById('panic-screen').style.display = 'block';
+        document.title = "Math Resource Hub";
+    }
+
+    // 3. TAB CLOAKER
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            document.title = "Google Docs - Biology Project";
+        } else {
+            document.title = "Integrated Dev Environment";
+        }
+    });
+
+    // 4. NOTES PERSISTENCE
+    function saveNotes() {
+        localStorage.setItem('lab_notes', document.getElementById('notes').value);
+        alert('Notes cached locally.');
+    }
+    document.getElementById('notes').value = localStorage.getItem('lab_notes') || "";
+
+    // 5. KEY LISTENERS
+    window.onkeydown = (e) => {
+        if (e.key === 'Escape') panic();
+        if (e.key === 'r' || e.key === 'R') {
+            if(document.getElementById('portal-wrap').style.display === 'block') initTunnel();
+        }
+    };
+</script>
+
+</body>
+</html>
